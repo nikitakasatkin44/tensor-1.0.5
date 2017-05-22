@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>My own website!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" type="text/css" href="../../css/bootstrap.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="../../css/style.css" th:href="@{/css/style.css}"/>
+</head>
+
+  <body>
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+          <div class="navbar-header">
+
+          </div>
+          <div class="collapse navbar-collapse" id="myNavbar">
+              <ul class="nav navbar-nav">
+                  <li><a href="${urlHome}">Home page</a></li>
+                  <li><a href="${about}">About me</a></li>
+                  <li><a href="#">Gallery</a></li>
+                  <li><a href="${contacts}">Contacts</a></li>
+                  <li><div sec:authorize="hasRole('ADMIN')"><a th:href="@{/list}">Users</a></div></li>
+                  <li><div sec:authorize="isFullyAuthenticated()"><a th:href="@{/games}">Games</a></div></li>
+              </ul>
+
+              <ul class="nav navbar-nav navbar-right">
+                  <div sec:authorize access="isFullyAuthenticated()">
+                      <li><a th:href="@{/logout}" th:text="#{prop.logout}">Log out</a></li>
+                  </div>
+                  <div sec:authorize access="isAnonymous()">
+                      <li><a th:href="@{/login}" th:text="#{prop.login}">Log in</a></li>
+                      <li><a th:href="@{/outsideRegister}">Registration</a></li>
+                  </div>
+              </ul>
+          </div>
+      </div>
+  </nav>
+
+
+
+  </body>
+
+</html>
